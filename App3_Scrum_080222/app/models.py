@@ -58,7 +58,7 @@ class Crateria(db.Model, TimestampMixin):
 
 #Car class that models the car table and all its attributes
 class Car(db.Model, TimestampMixin):
-    id = db.Column(db.Model, TimestampMixin)
+    id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String(180), nullable=False)
     model = db.Column(db.String(180), nullable=False)
     price = db.Column(db.Integer, nullable=False)
