@@ -51,10 +51,10 @@ class User(db.Model, TimestampMixin, UserMixin):
         return User.query.get(id)
 
 #This class will help the to search a car according to a certain crateria
-class Crateria(db.Model, TimestampMixin):
+class Criteria(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(120), nullable=False, unique=True)
-    car = db.relationship('Car', backref='crateria', lazy='dynamic')
+    car = db.relationship('Car', backref='criteria', lazy='dynamic')
 
 #Car class that models the car table and all its attributes
 class Car(db.Model, TimestampMixin):
@@ -64,7 +64,7 @@ class Car(db.Model, TimestampMixin):
     price = db.Column(db.Integer, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     colour = db.Column(db.String(90), nullable=False)
-    crateria_id = db.Column(db.Integer, db.ForeignKey('crateria.id'))
+    crateria_id = db.Column(db.Integer, db.ForeignKey('criteria.id'))
 
 class Review(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
