@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, \
-                redirect, url_for, request, session
+                redirect, url_for, request, session, jsonify
 from app.auth.forms import LoginForm, RegistrationForm, \
                             ResetPasswordForm,ResetPasswordRequestForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -40,6 +40,9 @@ def register():
             first_name=form.first_name.data.lower(),
             last_name=form.last_name.data.lower()
         )
+        if len(form.password.data) < 6:
+            flash("your password must contain at least 6 character", 'danger')
+            return redirect(url_for('auth.register'))
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -50,7 +53,7 @@ def register():
 @auth.route('/logout')
 def logout():
     logout_user()
-    #session.clear()
+    session.clear()
     flash("You've signed out!", "success")
     return redirect(url_for('main.index'))
 

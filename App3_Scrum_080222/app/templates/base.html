@@ -1,10 +1,10 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}
-    {{ title }} | APP-NAME here!
+{{ title }} | APP-NAME here!
 {% endblock %}
 {% block styles %}
-    {{ super() }}
-    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
+{{ super() }}
+<link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
 {% endblock %}
 
 {% block navbar %}
@@ -24,20 +24,30 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="glyphicon glyphicon-user"> </span> {{ current_user.username }}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="" >Logout</a></li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-user"> </span> {{ current_user.username }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </li>
                 {% else %}
-                    <li><a href="{{ url_for('auth.login') }}" >Login</a></li>
-                    <li><a href="{{ url_for('auth.register') }}" >Register</a></li>
+                <li><a href="{{ url_for('auth.login') }}" >Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}" >Register</a></li>
                 {% endif %}
-                    <li><a href="{{ url_for('about.about_us') }}">About Us</a></li>
+                <li><a href="{{ url_for('about.about_us') }}">About Us</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Criteria <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Make</a></li>
+                        <li><a href="#">Model</a></li>
+                        <li><a href="#">Price</a></li>
+                        <li><a href="#">Colour</a></li>
+                        <li><a href="#">Age</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -47,16 +57,16 @@
 {% block content %}
 <div class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }} text-center">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </a>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
     {% endwith %}
 
     <div class="row">
@@ -68,12 +78,12 @@
 {% endblock %}
 
 {% block scripts %}
-    {{ super() }}
-    <script type="text/javascript">
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function(){
-                $(this).remove(); 
-            });
-        }, 3000);
-    </script>
+{{ super() }}
+<script type="text/javascript">
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 3000);
+</script>
 {% endblock %}
