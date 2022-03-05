@@ -6,7 +6,7 @@ from app.funcs import save_picture
 
 
 car= Blueprint('car', __name__)
-
+# a comment
 @car.route('/used-vehicles', methods=["GET"])
 def cars(cat=None):
 	return render_template("car/used-car.html", title="used-vehicles")
