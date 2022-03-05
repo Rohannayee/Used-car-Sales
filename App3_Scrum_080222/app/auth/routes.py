@@ -34,21 +34,20 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(
-            username=form.username.data, 
-            email=form.email.data,
-            first_name=form.first_name.data.lower(),
-            last_name=form.last_name.data.lower()
-        )
-        if len(form.password.data) < 6:
-            flash("your password must contain at least 6 character", 'danger')
-            return redirect(url_for('auth.register'))
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user!', 'success')
-        return(redirect(url_for('auth.login')))
-    return render_template('auth/register.html', title='Register', form=form)
+        if request.methods == "POST":
+            user = User(
+                    username=form.username.data,
+                    email=form.email.data,
+                    first_name=form.first_name.data.lower(),
+                    last_name=form.last_name.data.lower()
+                )
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Congratulations, you are now a registered user!', 'success')
+            return redirect(url_for('auth.login'))
+    return render_template('auth/register.html', title="Register", form=form)
+
 
 @auth.route('/logout')
 def logout():

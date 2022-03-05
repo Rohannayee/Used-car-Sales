@@ -19,32 +19,46 @@
             </button>
         </div>
         <div class="collapse navbar-collapse">
+            <div class="navbar-brand">
+                <a href="{{url_for('main.index')}}">STARTGROUP</a>
+            </div>
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.index') }}" >Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-user"> </span> {{ current_user.username }}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="">Logout</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     </ul>
                 </li>
-                {% else %}
-                <li><a href="{{ url_for('auth.login') }}" >Login</a></li>
-                <li><a href="{{ url_for('auth.register') }}" >Register</a></li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('car.add_car')}}" class="nav-item">Add a car</a>
+                    </li>
                 {% endif %}
-                <li><a href="{{ url_for('about.about_us') }}">About Us</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Criteria <span class="caret"></span></a>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}" >Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}" >Register</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('about.about_us') }}">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href ="{{ url_for('car.cars') }}">Used Vehicules</a></li>
+                <li class="nav-item"><a class="nav-link" href ="#">Contact Us</a></li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Criteria <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Make</a></li>
+                        <li class="divider"></li>
                         <li><a href="#">Model</a></li>
+                        <li class="divider"></li>
                         <li><a href="#">Price</a></li>
+                        <li class="divider"></li>
                         <li><a href="#">Colour</a></li>
+                        <li class="divider"></li>
                         <li><a href="#">Age</a></li>
                     </ul>
                 </li>
