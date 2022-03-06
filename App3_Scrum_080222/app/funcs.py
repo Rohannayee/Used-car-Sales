@@ -1,3 +1,4 @@
+from app import app
 import os, binascii
 from PIL import Image
 

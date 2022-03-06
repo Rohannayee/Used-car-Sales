@@ -54,17 +54,16 @@ class User(db.Model, TimestampMixin, UserMixin):
 class Criteria(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(120), nullable=False, unique=True)
-    car = db.relationship('Car', backref='criteria', lazy='dynamic')
 
 #Car class that models the car table and all its attributes
 class Car(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String(180), nullable=False)
     model = db.Column(db.String(180), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     colour = db.Column(db.String(90), nullable=False)
-    crateria_id = db.Column(db.Integer, db.ForeignKey('criteria.id'))
+    image = db.Column(db.String(90))
 
 class Review(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
