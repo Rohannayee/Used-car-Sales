@@ -1,1 +1,38 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{title}}</title>
+</head>
+<body>
+	{% block app_content %}
+
+	{% if form.errors %}
+	<div class="alert alert-errors">
+		<ul>
+			{% for field, errors in form.errors.items() %}
+			<li>{{form[field].label}} : {{ ','. join(errors) }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+	<div class="col-md-4 offset-md-4">
+		<form class="form form-horizontal" action="{{url_for('car.create')}}", method="post" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+			{{ wtf.form_errors(form, hiddens="only") }}
+			{{ wtf.form_field(form.make)}}
+			{{ wtf.form_field(form.model)}}
+			{{ wtf.form_field(form.price)}}
+			{{ wtf.form_field(form.colour) }}
+			{{ wtf.form_field(form.age) }}
+			{{ wtf.form_field(form.image) }}
+			{{ wtf.form_field(form.submit, class="btn btn-lg btn-success") }}
+		</form>
+	</div>
+	{% endblock %}
+
+</body>
+</html>

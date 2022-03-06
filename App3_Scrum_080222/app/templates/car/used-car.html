@@ -1,1 +1,40 @@
 {% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+	<div class="row my-3">
+		<div class="col-md-4 dropdown">
+			<button class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown">All makes <span class="caret"></span></button>
+			<ul class="dropdown-menu">
+
+			</ul>
+		</div>
+		<div class="col-md-4 dropdown">
+			<button class="btn btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown">All models <span class="caret"></span></button>
+			<ul class="dropdown-menu">
+
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<button class="btn btn-lg btn-info">Price range</button>
+		</div>
+	</div>
+
+
+	{% block app_content %}
+	<div class="row">
+		{% for car in cars %}
+		<div class="col-md-4">
+			<h2><small>{{ car.make }}</small></h2>
+			<h2><small>{{ car.make }} {{ car.model }}</small></h2>
+			<h3><small>£{{car.price}}m</small></h3>
+			<a href="{{ url_for('car.car_info', id=car.id) }}">
+				<img src="{{ url_for('static', filename='car_pics/' + car.image) }}" alt="{{ car.model }}" title="{{ car.model }}">
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+	{% endblock %}
+</div>
+{% endblock %}

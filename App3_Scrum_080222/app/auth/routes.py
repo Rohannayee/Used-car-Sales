@@ -34,7 +34,7 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        if request.methods == "POST":
+        if request.method == "POST":
             user = User(
                     username=form.username.data,
                     email=form.email.data,
