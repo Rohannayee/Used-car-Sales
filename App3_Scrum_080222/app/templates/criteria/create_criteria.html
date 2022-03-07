@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{% block app_content %}
+<div class="col-md-4">
+	<form class="form form-horizontal" action="{{ url_for('criteria.create_criteria') }}" method="post">
+		{{ form.hidden_tag() }}
+		{{ wtf.form_errors(form, hiddens="only") }}
+		{{ wtf.form_field(form.type) }}
+		{{ wtf.form_field(form.submit, class="btn btn-lg btn-success") }}
+	</form>
+	<a class="btn btn-lg btn-info" href="{{ url_for('main.index') }}">Go back to the main page</a>
+</div>
+{% endblock %}
