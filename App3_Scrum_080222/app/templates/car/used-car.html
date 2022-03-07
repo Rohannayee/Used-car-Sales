@@ -7,17 +7,20 @@
 		<div class="col-md-4 dropdown">
 			<button class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown">All makes <span class="caret"></span></button>
 			<ul class="dropdown-menu">
-
+				{% for criteria in criterias %}
+					<li class="dropdown-item">
+						<a href="{{ url_for('car.cars', cat=criteria.type, t='make') }}">{{ criteria.type }}</a>
+					</li>
+				{% endfor %}
 			</ul>
 		</div>
 		<div class="col-md-4 dropdown">
 			<button class="btn btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown">All models <span class="caret"></span></button>
 			<ul class="dropdown-menu">
-
+				{% for model in models %}
+					<li class="dropdown-item"><a href="{{ url_for('car.cars', cat=model, t='model') }}">{{model}}</a></li>
+				{% endfor %}
 			</ul>
-		</div>
-		<div class="col-md-4">
-			<button class="btn btn-lg btn-info">Price range</button>
 		</div>
 	</div>
 
@@ -27,7 +30,7 @@
 		{% for car in cars %}
 		<div class="col-md-4">
 			<h2><small>{{ car.make }}</small></h2>
-			<h2><small>{{ car.make }} {{ car.model }}</small></h2>
+			<h2><small>{{ car.name }}</small></h2>
 			<h3><small>£{{car.price}}m</small></h3>
 			<a href="{{ url_for('car.car_info', id=car.id) }}">
 				<img src="{{ url_for('static', filename='car_pics/' + car.image) }}" alt="{{ car.model }}" title="{{ car.model }}">

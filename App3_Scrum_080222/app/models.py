@@ -24,6 +24,7 @@ class User(db.Model, TimestampMixin, UserMixin):
     password_hash = db.Column(db.String(128))
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
+    reviews = db.relationship('Review', backref='user', lazy='dynamic')
 
     # print to console username created
     def __repr__(self):
@@ -53,17 +54,21 @@ class User(db.Model, TimestampMixin, UserMixin):
 #This class will help the to search a car according to a certain crateria
 class Criteria(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(120), nullable=False, unique=True)
+    type = db.Column(db.String(30), nullable=False, unique=True)
+    car = db.relationship('Car', backref="criteria", lazy="dynamic")
 
 #Car class that models the car table and all its attributes
 class Car(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String(180), nullable=False)
     model = db.Column(db.String(180), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     colour = db.Column(db.String(90), nullable=False)
     image = db.Column(db.String(90))
+    reviews = db.relationship('Review', backref='car', lazy='dynamic')
+    criteria_id = db.Column(db.Integer, db.ForeignKey('criteria.id'))
 
 class Review(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)

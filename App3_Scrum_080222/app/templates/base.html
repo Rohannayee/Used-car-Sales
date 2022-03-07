@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('car.create')}}" class="nav-item">Add a car</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('criteria.create_criteria') }}">Add a criteria</a>
+                    </li>
                 {% endif %}
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}" >Login</a></li>
@@ -47,7 +50,7 @@
                 {% endif %}
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('about.about_us') }}">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href ="{{ url_for('car.cars') }}">Used Vehicules</a></li>
-                <li class="nav-item"><a class="nav-link" href ="#">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href ="{{ url_for('contact.contact_us') }}">Contact Us</a></li>
             </ul>
         </div>
     </div>

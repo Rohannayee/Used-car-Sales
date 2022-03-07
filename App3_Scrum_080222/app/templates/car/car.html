@@ -6,28 +6,26 @@
 
 {% block app_content %}
 <div class="col-md-4">
-	<img src="{{ url_for('static', filename='car_pics/' + car.image) }}">
+	<img src="{{ url_for('static', filename='car_pics/' + car.image) }}"><br/><br/>
+	<a href="{{ url_for('car.cars') }}" class="btn btn-lg btn-primary">Return to all cars</a>
+	<a href="#" class="btn btn-lg btn-warning">Edit car</a>
 </div>
-<div class="col-md-4">
+<div class="col-md-5">
 	<ul>
 		<li>{{ car.make }}</li>
 		<li>{{ car.model }}</li>
 		<li>£{{ car.price }}m</li>
 		<li>{{ car.colour }}</li>
 	</ul>
-</div>
-{% if current_user.is_authenticated %}
-<form class="form form-horizontal" action="{{ url_for('car.car_info', id=car.id) }}" method="post">
-	{{ form.hidden_tag() }}
-	{{ wtf.form_errors(form, hiddens = "only") }}
-	{{ wtf.form_field(form.rating) }}
-	{{ wtf.form_field(form.submit, class="btn btn-lg btn-success") }}
+	{% if current_user.is_authenticated %}
+	<form class="form form-horizontal" action="{{ url_for('car.car_info', id=car.id) }}" method="post">
+		{{ form.hidden_tag() }}
+		{{ wtf.form_errors(form, hiddens = "only") }}
+		{{ wtf.form_field(form.rating) }}
+		{{ wtf.form_field(form.submit, class="btn btn-lg btn-success") }}
 
-</form>
-{% endif %}
-
-<div class="return">
-	<a href="{{ url_for('car.cars') }}">Return to all cars</a>
+	</form>
+	{% endif %}
 </div>
 
 {% endblock %}

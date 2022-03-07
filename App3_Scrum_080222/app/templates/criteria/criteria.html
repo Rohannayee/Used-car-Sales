@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{% block app_content %}
+	<div class="col-md-6 offset-md-3">
+		<caption>All criterias</caption>
+		<table border="border">
+			<thead>
+				<tr>
+					<th class="text-primary">Criterias</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for criteria in criterias %}
+					<tr>
+						<td>{{ criteria.type }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a class="btn btn-lg btn-secondary my-3 mx-auto" href="{{ url_for('criteria.create_criteria') }}">Return to criteria creation</a>
+	</div>
+{% endblock %}
