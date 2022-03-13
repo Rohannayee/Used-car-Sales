@@ -9,5 +9,4 @@ class ContactUsForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
 	email = StringField('email address', validators=[DataRequired(), Email()])
 	text = TextAreaField('your suggestion', validators=[DataRequired()])
-	password = PasswordField('your password', validators=[DataRequired(), Length(min=8, message=("your password should contain at least 8 characters"))])
 	submit = SubmitField('Send')

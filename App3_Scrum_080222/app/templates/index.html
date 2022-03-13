@@ -1,15 +1,49 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block navbar %}
 
+<header>
+  <nav>
+    <div id="main">
+      <h1>StarGroup</h1>
+      <ul>
+        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li><a href="{{ url_for('car.cars') }}">Used Vehicles</a></li>
+        <li><a href="{{ url_for('about.about_us') }}">About Us </a></li>
+        <li><a href="{{ url_for('contact.contact_us') }}">Contact Us</a></li>
+        {% if current_user.is_authenticated %}
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="glyphicon glyphicon-user"></span> {{
+            current_user.username }}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="{{ url_for('auth.logout') }}">Logout</a>
+            </li>
+          </ul>
+        </li>
+        {% else %}
 
-{% block app_content %}
+        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
 
-	<section>
-		<h2> SHOP USED CARS AT STARGROUP </h2>
-		<h1> search our vehicule stock today and purchase how you want! Order online,by phone or by visiting us in store </h1>
-	</section>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</header>
 
-	<div class="link offset-md-3 my-3">
-		<a class="btn btn-info" href="{{ url_for('car.cars') }}">Click here to view the cars</a>
-	</div>
+{% endblock %} {% block app_content %}
 
+<div class="banner-text">
+  <h2>Shop used cars at “StarGroup”</h2>
+
+  <p>
+    Search our vehicle stock today and purchase how you want! order Online, by
+    phone or by visiting us in store.
+  </p>
+  <a class="btn btn-info" href="{{ url_for('car.cars') }}"
+    >Click here to view the cars</a
+  >
+</div>
 {% endblock %}
