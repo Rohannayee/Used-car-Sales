@@ -1,92 +1,72 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}
-{{ title }} | APP-NAME here!
-{% endblock %}
-{% block styles %}
-{{ super() }}
-<link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
-{% endblock %}
+{% extends "bootstrap/base.html" %} {% block title %} {{ title }} | APP-NAME
+here! {% endblock %} {% block styles %} {{ super() }}
+<link
+  href="{{url_for('static', filename='css/styles.css')}}"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  type="image/png"
+  href="{{ url_for('static', filename='star.png') }}"
+/>
+{% endblock %} {% block navbar %}
+<header>
+  <nav style="background-color: aliceblue;">
+    <div>
+      <h1>StarGroup</h1>
+      <ul>
+        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li><a href="{{ url_for('car.cars') }}">Used Vehicles</a></li>
+        <li><a href="{{ url_for('about.about_us') }}">About Us </a></li>
+        <li><a href="{{ url_for('contact.contact_us') }}">Contact Us</a></li>
+        {% if current_user.is_authenticated %}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-user"></span> {{ current_user.username }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </li>
+        {% else %}
 
-{% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse">
-            <div class="navbar-brand">
-                <a href="{{url_for('main.index')}}">STARTGROUP</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Home</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                <li class="dropdown nav-item">
-                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
-                        <span class="glyphicon glyphicon-user"> </span> {{ current_user.username }}
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-                    </ul>
-                </li>
-                {% if current_user.is_authenticated and current_user.is_admin%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('car.create')}}" class="nav-item">Add a car</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('criteria.create_criteria') }}">Add a criteria</a>
-                    </li>
-                {% endif %}
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}" >Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}" >Register</a></li>
-                {% endif %}
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('about.about_us') }}">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href ="{{ url_for('car.cars') }}">Used Vehicules</a></li>
-                <li class="nav-item"><a class="nav-link" href ="{{ url_for('contact.contact_us') }}">Contact Us</a></li>
-            </ul>
-        </div>
+        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+        
+        {% endif %}
+      </ul>
     </div>
-</nav>
-{% endblock %}
+  </nav>
+</header>
 
-{% block content %}
+{% endblock %} {% block content %}
 <div class="container">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }} text-center">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-        </a>
-        {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div class="alert alert-{{ category }} text-center">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">
+      <span aria-hidden="true">&times;</span>
+    </a>
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
 
-    <div class="row my-4">
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
-    </div>
-
+  <div class="row my-4">
+    {# application content needs to be provided in the app_content block #} {%
+    block app_content %}{% endblock %}
+  </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
+{% endblock %} {% block scripts %} {{ super() }}
 <script type="text/javascript">
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function(){
-            $(this).remove();
-        });
-    }, 3000);
+  window.setTimeout(function () {
+    $(".alert")
+      .fadeTo(500, 0)
+      .slideUp(500, function () {
+        $(this).remove();
+      });
+  }, 3000);
 </script>
 {% endblock %}
