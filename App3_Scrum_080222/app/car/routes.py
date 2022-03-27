@@ -19,6 +19,8 @@ def cars(cat=None, t=None):
 			cars = [c for c in Car.query.filter_by(model=cat)]
 		elif t == "make":
 			cars = [c for c in Car.query.filter_by(make=cat)]
+		elif t == "price":
+			pass
 	return render_template("car/used-car.html", title="used-vehicles", cars=cars, models=models, criterias=criterias)
 
 @car.route('/used-vehicles/create', methods=["GET", "POST"])
@@ -39,6 +41,7 @@ def create():
 				price = form.price.data,
 				name = form.name.data,
 				colour = form.colour.data,
+				history = form.history.data,
 				age = form.age.data,
 				image = image,
 				criteria_id = form.criteria_id.data

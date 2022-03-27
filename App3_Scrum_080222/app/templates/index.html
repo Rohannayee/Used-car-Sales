@@ -10,6 +10,10 @@
         <li><a href="{{ url_for('about.about_us') }}">About Us </a></li>
         <li><a href="{{ url_for('contact.contact_us') }}">Contact Us</a></li>
         {% if current_user.is_authenticated %}
+        {% if current_user.is_admin %}
+        <li><a href="{{ url_for('car.create') }}">Add a car</a></li>
+        <li><a href="{{ url_for('criteria.create_criteria') }}">Add a make</a></li>
+        {% endif %}
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="glyphicon glyphicon-user"></span> {{

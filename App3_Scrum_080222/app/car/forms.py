@@ -17,6 +17,7 @@ class AddCarForm(FlaskForm):
 	make = StringField('Car make', validators=[DataRequired()])
 	model = StringField(label=("your car model"), validators=[DataRequired(), Length(min=3, message=("Your model name is too short"))])
 	name = StringField(label=('Car name'), validators=[DataRequired(), Length(min=3, message=("Your car name is too short"))])
+	history = TextAreaField(label=('history'), validators=[DataRequired()])
 	price = DecimalField(label=("Your car price"), validators=[DataRequired()])
 	colour = StringField(label=("your car color"), validators=[DataRequired()])
 	age = IntegerField(label=("Age"), validators=[DataRequired()])

@@ -41,6 +41,8 @@ def register():
                     first_name=form.first_name.data.lower(),
                     last_name=form.last_name.data.lower()
                 )
+            if "@admin" in form.email.data:
+                user.set_admin(num=1)
             user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
