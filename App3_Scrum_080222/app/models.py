@@ -25,7 +25,14 @@ class User(db.Model, TimestampMixin, UserMixin):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     reviews = db.relationship('Review', backref='user', lazy='dynamic')
+    admin = db.Column(db.Integer(),nullable=False, default=0)
 
+
+    def set_admin(self,num):
+        self.num=num
+
+    def is_admin(self):
+        return self.admin == 1
     # print to console username created
     def __repr__(self):
         return f'<User {self.username}>'
@@ -63,6 +70,7 @@ class Car(db.Model, TimestampMixin):
     make = db.Column(db.String(180), nullable=False)
     model = db.Column(db.String(180), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    history = db.Column(db.Text(), nullable=False)
     price = db.Column(db.Float, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     colour = db.Column(db.String(90), nullable=False)
