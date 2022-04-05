@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-	<div class="col-md-4">
+	<div class="presentations col-md-6 offset-md-6">
+		<p style="font-size:x-large">
+			So who are we?<br/>
+			<strong>StarGroup</strong> of second-hand cars. is a small business 
+			that recently opened in 2021. we specialize in the sale 
+		</p>
+		<h2>Fancy a chat?</h2>
+		<p style="font-size: x-large;">
+			If you have a question about a car or simply want to know more about 
+			what we do, click the button below!<br/>
+			<a href="{{ url_for('contact.contact_us') }}" class="btn btn-lg btn-success">Get in touch</a>
+		</p>
+	</div>
+	<!--<div class="col-md-4">
 		<h2>About Us</h2>
 		<p>
 			Car sales company located in Reading. Our goal is to sell cars over the internet.
@@ -11,5 +24,5 @@
 	<div class="col-md-4">
 		<h2>Get in touch with us</h2>
 		email: <a href="mailto:carsales@contact-us.co.ac.uk">Click here to send us an email</a>
-	</div>
+	</div>-->
 {% endblock %}
