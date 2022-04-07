@@ -19,7 +19,7 @@
 		</ul>
 	</div>
 	{% endif %}
-	<div class="col-md-4 offset-md-4">
+	<div class="col-md-4 col-md-offset-4">
 		<form class="form form-horizontal" action="{{url_for('car.create')}}", method="post" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 			{{ wtf.form_errors(form, hiddens="only") }}

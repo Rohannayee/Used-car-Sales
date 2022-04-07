@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/used-cars.css') }}" type="text/css">
+{% endblock %}
+
 {% block content %}
 <div class="container">
 
@@ -22,21 +27,20 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div class="col-md-4 dropdown">
-			<button class="btn btn-lg btn-info dropdown-toggle" data-toggle="dropdown">
-				Price<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li class="dropdown-item"><a href="">Lowest</a></li>
-				<li class="divider"></li>
-				<li class="dropdown-item"><a href="">Highest</a></li>
-			</ul>
+		<div class="col-md-4">
+			<form action="{{ url_for('car.cars') }}" method="GET">
+				<label for="number1">price 1</label>
+				<input type="number" name="number1" id="number1">
+				<label for="number2">price 2</label>
+				<input type="number" name="number2" id="number2">
+				<label for="search">Search</label>
+				<input class="btn btn-success btn-lg" type="submit" value="Search" id="search">
+			</form>
 		</div>
 	</div>
 
 
 	{% block app_content %}
-	<div class="row">
 		{% for car in cars %}
 		<div class="col-md-4">
 			<h2><small>{{ car.make }}</small></h2>
@@ -47,7 +51,6 @@
 			</a>
 		</div>
 		{% endfor %}
-	</div>
 	{% endblock %}
 </div>
 {% endblock %}
