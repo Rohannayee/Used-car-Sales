@@ -29,7 +29,7 @@ class User(db.Model, TimestampMixin, UserMixin):
 
 
     def set_admin(self,num):
-        self.num=num
+        self.admin=num
 
     def is_admin(self):
         return self.admin == 1

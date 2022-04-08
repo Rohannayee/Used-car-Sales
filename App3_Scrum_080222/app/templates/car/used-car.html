@@ -28,11 +28,11 @@
 			</ul>
 		</div>
 		<div class="col-md-4">
-			<form action="{{ url_for('car.cars') }}" method="GET">
+			<form action="{{ url_for('car.cars') }}" method="get">
 				<label for="number1">price 1</label>
-				<input type="number" name="number1" id="number1">
+				<input type="number" name="number1" id="number1" required="required" step=0.01>
 				<label for="number2">price 2</label>
-				<input type="number" name="number2" id="number2">
+				<input type="number" name="number2" id="number2" required="required" step=0.01>
 				<label for="search">Search</label>
 				<input class="btn btn-success btn-lg" type="submit" value="Search" id="search">
 			</form>
