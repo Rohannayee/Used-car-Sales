@@ -51,6 +51,57 @@
 			</a>
 		</div>
 		{% endfor %}
+
 	{% endblock %}
 </div>
+<div class="faq">
+	<h2 class="text-center text-primary"><small>Frequently asked questions</small></h2>
+	<button class="accordion">How used are the cars?</button>
+	<div class="answer">
+		<p>
+			No need to worry about how used are the cars. When the sellers
+			leave their car, we refurbish so we can reduce any problems for the 
+			new buyers.
+		</p>
+	</div>
+	<button class="accordion">What to do if there is any problem with the car</button>
+	<div class="answer">
+		<p>
+			For any problem with the car; you just need to call our office and we will
+			assign a mechanic to you. The car has 2years of guarantee so if you are still
+			under this guarantee You will also be able to change your car.  
+		</p>
+	</div>
+	<button class="accordion">Who can we know the seller is actually a seller and not a dealer</button>
+	<div class="answer">
+		<p>
+			Our policy only allows the actual seller to sell their cars. A proof is needed 
+			for them to show that they are the actual car seller.
+		</p>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+	{{super()}}
+	<script type="text/javascript">
+		var accordion = document.getElementsByClassName('accordion');
+		buttons = Array.from(accordion);
+		buttons.map((button,i)=>{
+			button.addEventListener('click',()=>{
+				button.classList.toggle('active');
+				var answer = button.nextElementSibling;
+				if(answer.style.display == ""){
+					answer.style.display = "block";
+				}else{
+					answer.style.display = "";
+				}
+				if(answer.style.maxHeight){
+					answer.style.maxHeight = null;
+				}else{
+					answer.style.maxHeight = answer.scrollHeight + "px";
+				}
+			});
+		});
+	</script>
 {% endblock %}
