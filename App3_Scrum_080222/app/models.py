@@ -29,7 +29,7 @@ class User(db.Model, TimestampMixin, UserMixin):
 
 
     def set_admin(self,num):
-        self.num=num
+        self.admin=num
 
     def is_admin(self):
         return self.admin == 1
@@ -84,3 +84,7 @@ class Review(db.Model, TimestampMixin):
     rating = db.Column(db.Float, default=0.0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
+
+class Visitor(db.Model, TimestampMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(255), nullable=False)

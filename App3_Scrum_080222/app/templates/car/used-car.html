@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/used-cars.css') }}" type="text/css">
+{% endblock %}
+
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 
 	<div class="row my-3">
 		<div class="col-md-4 dropdown">
@@ -22,21 +27,20 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div class="col-md-4 dropdown">
-			<button class="btn btn-lg btn-info dropdown-toggle" data-toggle="dropdown">
-				Price<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li class="dropdown-item"><a href="">Lowest</a></li>
-				<li class="divider"></li>
-				<li class="dropdown-item"><a href="">Highest</a></li>
-			</ul>
+		<div class="col-md-4">
+			<form action="{{ url_for('car.cars') }}" method="get">
+				<label for="number1">price 1</label>
+				<input type="number" name="number1" id="number1" required="required" step=0.01>
+				<label for="number2">price 2</label>
+				<input type="number" name="number2" id="number2" required="required" step=0.01>
+				<label for="search">Search</label>
+				<input class="btn btn-success btn-lg" type="submit" value="Search" id="search">
+			</form>
 		</div>
 	</div>
 
 
 	{% block app_content %}
-	<div class="row">
 		{% for car in cars %}
 		<div class="col-md-4">
 			<h2><small>{{ car.make }}</small></h2>
@@ -47,7 +51,58 @@
 			</a>
 		</div>
 		{% endfor %}
-	</div>
+
 	{% endblock %}
 </div>
+
+<div class="faq">
+	<h2 class="text-center text-primary"><small>Frequently asked questions</small></h2>
+	<button class="accordion">How used are the cars?</button>
+	<div class="answer">
+		<p>
+			No need to worry about how used are the cars. When the sellers
+			leave their car, we refurbish so we can reduce any problems for the 
+			new buyers.
+		</p>
+	</div>
+	<button class="accordion">What to do if there is any problem with the car?</button>
+	<div class="answer">
+		<p>
+			For any problem with the car; you just need to call our office and we will
+			assign a mechanic to you. The car has 2years of guarantee so if you are still
+			under this guarantee You will also be able to change your car.  
+		</p>
+	</div>
+	<button class="accordion">Who can we know the seller is actually a seller and not a dealer?</button>
+	<div class="answer">
+		<p>
+			Our policy only allows the actual seller to sell their cars. A proof is needed 
+			for them to show that they are the actual car seller.
+		</p>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+	{{super()}}
+	<script type="text/javascript">
+		var accordion = document.getElementsByClassName('accordion');
+		buttons = Array.from(accordion);
+		buttons.map((button,i)=>{
+			button.addEventListener('click',()=>{
+				button.classList.toggle('active');
+				var answer = button.nextElementSibling;
+				if(answer.style.display == ""){
+					answer.style.display = "block";
+				}else{
+					answer.style.display = "";
+				}
+				if(answer.style.maxHeight){
+					answer.style.maxHeight = null;
+				}else{
+					answer.style.maxHeight = answer.scrollHeight + "px";
+				}
+			});
+		});
+	</script>
 {% endblock %}

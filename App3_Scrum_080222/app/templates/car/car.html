@@ -8,7 +8,7 @@
 <div class="col-md-4">
 	<img src="{{ url_for('static', filename='car_pics/' + car.image) }}"><br/><br/>
 	<a href="{{ url_for('car.cars') }}" class="btn btn-lg btn-primary">Return to all cars</a>
-	{% if current_user.is_admin %}
+	{% if current_user.is_authenticated and current_user.is_admin() %}
 	<a href="#" class="btn btn-lg btn-warning">Edit car</a>
 	{% endif %}
 </div>

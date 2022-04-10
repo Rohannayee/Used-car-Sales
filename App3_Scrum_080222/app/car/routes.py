@@ -19,8 +19,13 @@ def cars(cat=None, t=None):
 			cars = [c for c in Car.query.filter_by(model=cat)]
 		elif t == "make":
 			cars = [c for c in Car.query.filter_by(make=cat)]
-		elif t == "price":
-			pass
+	elif request.args.get('number1') is not None and request.args.get('number2') is not None:
+		number1 = float(request.args.get('number1'))
+		number2 = float(request.args.get('number2'))
+		cars = [c for c in Car.query.all() if c.price >= number1 and c.price <= number2]
+		if cars.count == 0:
+			flash(f"{cars.count} found from records",'danger')
+		flash(f"{cars.count} found from records", 'success')
 	return render_template("car/used-car.html", title="used-vehicles", cars=cars, models=models, criterias=criterias)
 
 @car.route('/used-vehicles/create', methods=["GET", "POST"])
@@ -35,8 +40,9 @@ def create():
 		if request.method == "POST":
 			if form.image.data:
 				image = save_picture(form.image.data)
+			car_make = form.make.data.lower()
 			car = Car(
-				make = form.make.data,
+				make = car_make,
 				model = form.model.data,
 				price = form.price.data,
 				name = form.name.data,
@@ -71,5 +77,5 @@ def car_info(id):
 			db.session.add(review)
 			db.session.commit()
 			flash("Your review has been added")
-			return redirect(url_for('car.cars'))
+			return redirect(url_for('car.car_info'))
 	return render_template('car/car.html', car=current_car, form=form)

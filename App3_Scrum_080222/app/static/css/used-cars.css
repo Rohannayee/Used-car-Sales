@@ -1,0 +1,33 @@
+.col-md-4 label{
+    display:block;
+}
+
+.faq .accordion{
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-size:x-large;
+}
+
+.active, .accordion:hover{
+    background-color: #ccc;
+}
+
+.faq .answer{
+    padding: 0 18px;
+    background-color: white;
+    max-height:0;
+    display: none;
+    overflow: hidden;
+    transition:max-height 0.2s ease-out;
+}
+
+.faq .answer p{
+    font-size:x-large;
+}

@@ -19,8 +19,9 @@ def create_criteria():
 	form = AddCriteriaForm()
 	if form.validate_on_submit():
 		if request.method == "POST":
+			criteria_type = form.type.data.lower()
 			criteria = Criteria(
-				type = form.type.data
+				type = criteria_type
 			)
 			db.session.add(criteria)
 			db.session.commit()
