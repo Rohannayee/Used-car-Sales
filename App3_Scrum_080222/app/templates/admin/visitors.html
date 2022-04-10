@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock %}
+
+    {% block app_content %}
+        <div class="col-md-4 visitors">
+            <h2 class="text-primary">Visitors</h2>
+            <p class="para">{{ visitors_size }} visitors have visited the website</p>
+        </div>
+        <div class="col-md-4 visitors">
+            <h2 class="text-primary">Registered visitors</h2>
+            <p class="para">{{ users_size }} visitors have registered to the website</p>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-success" href="{{ url_for('main.index') }}">Return to the landing page</a>
+        </div>
+    {% endblock %}
+
+{% block scripts %}
+        {{super()}}
+        <script type="text/javascript">
+            var paras = document.querySelectorAll('.para');
+            var i;
+            for(i=0;i<paras.length;i++){
+                paras[i].style.fontSize = "x-large";
+            }
+        </script>
+{% endblock %}

@@ -13,6 +13,7 @@
         {% if current_user.is_admin() %}
         <li><a href="{{ url_for('car.create') }}">Add a car</a></li>
         <li><a href="{{ url_for('criteria.create_criteria') }}">Add a make</a></li>
+        <li><a href="{{ url_for('admin.visitors') }}">Visitors</a></li>
         {% endif %}
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">

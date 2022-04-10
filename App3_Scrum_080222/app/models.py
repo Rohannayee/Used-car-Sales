@@ -84,3 +84,7 @@ class Review(db.Model, TimestampMixin):
     rating = db.Column(db.Float, default=0.0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
+
+class Visitor(db.Model, TimestampMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(255), nullable=False)
